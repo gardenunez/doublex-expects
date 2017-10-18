@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import doublex
-from expects import expect, be_a, contain
+from expects import expect, be_a, contain, have_keys, raise_error
 from expects.testing import failure
 from expects.texts import plain_enumerate
 
@@ -100,6 +100,14 @@ with describe('have_been_called_with'):
             self.method()
 
             expect(self.method).to(have_been_called_with(any_arg))
+        
+        with it('should fail if exists arguments after'):
+            self.method(self.arg1, self.arg2, self.arg3)
+            
+            expect(lambda: expect(self.method).to(have_been_called_with(any_arg, self.arg2, self.arg3))).to(
+                raise_error(InvalidApiUsage, "ANY_ARG must be the last positional argument"))
+            expect(lambda: expect(self.method).to(have_been_called_with(self.arg1, any_arg, self.arg3))).to(
+                raise_error(InvalidApiUsage, "ANY_ARG must be the last positional argument"))
 
     with describe('once'):
         with it('passes if called with args once'):

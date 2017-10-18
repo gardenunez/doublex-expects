@@ -1,0 +1,2 @@
+class InvalidApiUsage(Exception):
+    pass

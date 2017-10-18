@@ -4,6 +4,8 @@ from expects import be_above_or_equal, be_below_or_equal
 from expects.matchers import Matcher, default_matcher
 from expects.texts import plain_enumerate
 
+from .exceptions import InvalidApiUsage
+
 MAX_TIMES = be_below_or_equal
 MIN_TIMES = be_above_or_equal
 
@@ -95,6 +97,8 @@ class have_been_called_with(Matcher):
     def _match_args(self, call):
         for i, matcher in enumerate(self._args):
             if matcher is any_arg:
+                if len(self._args) - 1 != i:
+                    raise InvalidApiUsage("ANY_ARG must be the last positional argument")
                 return True
 
             try:
