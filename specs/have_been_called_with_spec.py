@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import doublex
-from expects import expect, be_a, contain, have_keys, raise_error
+from expects import expect, be_a, raise_error
 from expects.testing import failure
-from expects.texts import plain_enumerate
 
 from doublex_expects import *
 

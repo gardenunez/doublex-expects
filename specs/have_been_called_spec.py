@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import doublex
-from expects import expect, contain
+from expects import expect
 from expects.testing import failure
 
 from doublex_expects import *
